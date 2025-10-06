@@ -26,5 +26,11 @@ curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -
 curl -LsSf https://astral.sh/uv/install.sh | sh
 source $HOME/.local/bin/env
 
-# run the init script to set up the python env and install necessary packages
-just init
+# run the init script, if it exists
+test -x justfile && just init && exit
+
+# otherwise if requirementes.txt exists and the env does not exist, create it and install
+if test -f requirements.txt && test! -f env; then
+  uv create env
+  uv install --no-color --save -r requirements.txt
+fi
