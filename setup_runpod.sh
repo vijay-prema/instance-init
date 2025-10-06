@@ -1,20 +1,22 @@
 #!/bin/bash
 
-# Usual steps:
-# 1. Create runpod with default options and image: runpod/pytorch:1.0.1-cu1281-torch280-ubuntu2404
+# Typical steps to setup runpod instance from scratch for vscode remote development:
+
+# 1. Create runpod with default options and image e.g.: runpod/pytorch:1.0.1-cu1281-torch280-ubuntu2404
 # 2. Open VS Code remote window, ssh using the runpd IP address/port option, just enter `user@ip:port` e.g. `root@231.123.100.199:10477`
 # 3. Create or clone the code repo you want into /workspaces/
 # 4. Download and run this init script, in the cloned directory which should be already opened in vscode:
 #    `curl -sSL https://raw.githubusercontent.com/vijay-prema/instance-init/refs/heads/main/setup_runpod.sh | bash`
 
-# Assuming the machine already has NVIDIA and CUDA installed, enough to run pytorch
+# Assuming the runpod machine already has the correct NVIDIA driver and CUDA installed, enough to run pytorch
 
-# Install all the useful stuff on a fresh pod:
 
-# update and install the basics
+#### Install all the useful stuff on a fresh pod:
+
+# update and install the basics for a good developer experience
 apt update
 apt -y upgrade
-apt -y install micro rsync ffmpeg fish git nvtop ncdu zip
+apt -y install micro rsync ffmpeg fish git nvtop htop zip unzip mc trash-cli ncdu duf docker.io docker-compose-v2
 
 # croc (a tool for securely sending files between machines)
 if ! which -s croc; then
@@ -33,7 +35,7 @@ if ! which -s uv; then
 fi
 
 
-## OPTIONAL initial setup for the python project, if a justfile, pyproject.toml or requirements.txt exists in current directory
+#### OPTIONAL initial setup for the python project, if a justfile, pyproject.toml or requirements.txt exists in current directory
 if test -x justfile; then
   just init
 elif test -f pyproject.toml && ! test -f .venv; then
