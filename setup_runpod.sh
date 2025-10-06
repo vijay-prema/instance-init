@@ -4,7 +4,7 @@
 # 1. Create runpod with default options and image: runpod/pytorch:1.0.1-cu1281-torch280-ubuntu2404
 # 2. Open VS Code remote window, ssh using the runpd IP address/port option
 # 3. Create or clone the code repo you want into /workspaces/
-# 4. Download and run this init script:
+# 4. Download and run this init script, in the cloned directory which should be already opened in vscode:
 #    `curl -sSL https://raw.githubusercontent.com/vijay-prema/instance-init/refs/heads/main/setup_runpod.sh | bash`
 
 # Assuming the machine already has NVIDIA and CUDA installed, enough to run pytorch
@@ -32,14 +32,18 @@ if ! which -s uv; then
   source $HOME/.local/bin/env
 fi
 
+
+## OPTIONAL initial setup for the specific project, if a justfile or requirements.txt exists in current directory
 # run the init script, if it exists
 if test -x justfile; then
   just init
 elif test -f requirements.txt && ! test -f .venv; then
-  # otherwise if requirementes.txt exists and the env does not exist, create it and install
+  # otherwise if requirements.txt exists and the env does not exist, create it and install
   uv venv
-  uv pip sync requirements.txt
+  uv pip install -r requirements.txt
   echo
+  echo "Installed environment using `uv`"
+  echo "Use `uv pip install` instead of `pip install`"
   echo "Activate with: source .venv/bin/activate"
   echo
 fi
