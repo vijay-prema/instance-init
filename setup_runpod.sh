@@ -17,17 +17,17 @@ apt -y upgrade
 apt -y install micro rsync ffmpeg fish git nvtop ncdu zip
 
 # croc (a tool for securely sending files between machines
-if which! -s croc; then
+if ! which -s croc; then
   curl https://getcroc.schollz.com | bash
 fi
 
 # just (a more modern make tool for running scripts in justfile)
-if which! -s just; then
+if ! which -s just; then
   curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /bin
 fi
 
 # uv (a better python package manager)
-if which! -s uv; then
+if ! which -s uv; then
   curl -LsSf https://astral.sh/uv/install.sh | sh
   source $HOME/.local/bin/env
 fi
