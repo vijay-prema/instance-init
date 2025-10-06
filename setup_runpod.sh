@@ -37,13 +37,21 @@ fi
 # run the init script, if it exists
 if test -x justfile; then
   just init
+elif test -f pyproject.toml && ! test -f .venv; then
+  uv venv
+  uv sync
+  echo
+  echo "Installed environment using `uv sync` and `pyproject.toml`"
+  echo "Use `uv sync` after adding to `pyproject.toml`, instead of `pip install`"
+  echo "Activate with: source .venv/bin/activate"
+  echo
 elif test -f requirements.txt && ! test -f .venv; then
   # otherwise if requirements.txt exists and the env does not exist, create it and install
   uv venv
   uv pip install -r requirements.txt
   echo
-  echo "Installed environment using `uv`"
-  echo "Use `uv pip install` instead of `pip install`"
+  echo "Installed environment using `uv pip` and `requirements.txt`"
+  echo "Use `uv pip install`, instead of `pip install`"
   echo "Activate with: source .venv/bin/activate"
   echo
 fi
