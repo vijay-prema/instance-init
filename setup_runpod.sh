@@ -17,20 +17,26 @@ apt -y upgrade
 apt -y install micro rsync ffmpeg fish git nvtop ncdu zip
 
 # croc (a tool for securely sending files between machines
-curl https://getcroc.schollz.com | bash
+if which! -s croc; then
+  curl https://getcroc.schollz.com | bash
+fi
 
 # just (a more modern make tool for running scripts in justfile)
-curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /bin
+if which! -s just; then
+  curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /bin
+fi
 
 # uv (a better python package manager)
-curl -LsSf https://astral.sh/uv/install.sh | sh
-source $HOME/.local/bin/env
+if which! -s uv; then
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+  source $HOME/.local/bin/env
+fi
 
 # run the init script, if it exists
-test -x justfile && just init && exit
-
-# otherwise if requirementes.txt exists and the env does not exist, create it and install
-if test -f requirements.txt && test! -f env; then
+if test -x justfile
+  just init
+elif test -f requirements.txt && test! -f env; then
+  # otherwise if requirementes.txt exists and the env does not exist, create it and install
   uv create env
   uv install --no-color --save -r requirements.txt
 fi
