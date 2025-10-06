@@ -35,7 +35,7 @@ fi
 # run the init script, if it exists
 if test -x justfile; then
   just init
-elif test -f requirements.txt && test! -f env; then
+elif test -f requirements.txt && ! test -f env; then
   # otherwise if requirementes.txt exists and the env does not exist, create it and install
   uv create env
   uv install --no-color --save -r requirements.txt
