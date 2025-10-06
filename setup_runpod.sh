@@ -40,6 +40,7 @@ if test -x justfile; then
   just init
 elif test -f pyproject.toml && ! test -f .venv; then
   uv venv
+  source .venv/bin/activate
   uv sync
   echo
   echo "Installed environment using `uv sync` and `pyproject.toml`"
@@ -48,6 +49,7 @@ elif test -f pyproject.toml && ! test -f .venv; then
   echo
 elif test -f requirements.txt && ! test -f .venv; then
   uv venv
+  source .venv/bin/activate
   uv pip install -r requirements.txt
   echo
   echo "Installed environment using `uv pip` and `requirements.txt`"
