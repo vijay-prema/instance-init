@@ -39,5 +39,7 @@ elif test -f requirements.txt && ! test -f .venv; then
   # otherwise if requirementes.txt exists and the env does not exist, create it and install
   uv venv
   uv pip sync requirements.txt
-  echo "\nActivate with: source .venv/bin/activate"
+  echo
+  echo "Activate with: source .venv/bin/activate"
+  echo
 fi
