@@ -11,6 +11,9 @@ _Note that raw links to github content like above, take some time to update afte
 
 ## Tips for working with remote instances
 
-- Transfer a file or folder using `croc send ...` on the sender, and on the recipient run `croc` and paste the code.
-- Another seamless option for sharing files is mount a SSHFS folder in the remote instance.
+- Options for sharing files:
+  - Transfer a file or folder using `croc send ...` on the sender, and on the recipient run `croc` and paste the code.
+  - Use rsync to one-way sync a large number of data files e.g. `rsync --info=progress2 -r -e "ssh -p 31739 -i ~/.ssh/id_rsa.pub" ./datafiles root@99.80.99.155:/workspace/`, replacing ip address and port.  This would one-way sync the `datafiles` folder and contents to `/workspace/` on the remote.
+  - Another seamless option for sharing files is mount a SSHFS folder in the remote instance.
+  - Some providers may have their own tools which might have extra convenciences but becomes provider specific, so often better to use generic methods mentioned above. e.g. `runpodctl send ...` for runpod instances.
 - VS code can remotely work with an instance over SSH. All files will be kept on the instance, and all terminal commands and shells will run on the instance too.  Just hit the blue `><` icon at the bottom left and paste the ssh command. 
