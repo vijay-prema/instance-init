@@ -3,7 +3,7 @@
 Public helper scripts to quickly initialize remote linux server instances, e.g. [Runpod](https://console.runpod.io/deploy) or various VPS providers
 
 Each script will have its own instructions but generally you can run something like:
-```
+```sh
 curl -sSL https://raw.githubusercontent.com/vijay-prema/instance-init/refs/heads/main/setup_runpod.sh | bash
 ```
 
