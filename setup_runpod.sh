@@ -33,8 +33,7 @@ if ! which -s uv; then
 fi
 
 
-## OPTIONAL initial setup for the specific project, if a justfile or requirements.txt exists in current directory
-# run the init script, if it exists
+## OPTIONAL initial setup for the python project, if a justfile, pyproject.toml or requirements.txt exists in current directory
 if test -x justfile; then
   just init
 elif test -f pyproject.toml && ! test -f .venv; then
@@ -46,7 +45,6 @@ elif test -f pyproject.toml && ! test -f .venv; then
   echo "Activate with: source .venv/bin/activate"
   echo
 elif test -f requirements.txt && ! test -f .venv; then
-  # otherwise if requirements.txt exists and the env does not exist, create it and install
   uv venv
   uv pip install -r requirements.txt
   echo
