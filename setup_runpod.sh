@@ -33,7 +33,7 @@ if ! which -s uv; then
 fi
 
 # run the init script, if it exists
-if test -x justfile
+if test -x justfile; then
   just init
 elif test -f requirements.txt && test! -f env; then
   # otherwise if requirementes.txt exists and the env does not exist, create it and install
