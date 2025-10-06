@@ -16,7 +16,7 @@ apt update
 apt -y upgrade
 apt -y install micro rsync ffmpeg fish git nvtop ncdu zip
 
-# croc (a tool for securely sending files between machines
+# croc (a tool for securely sending files between machines)
 if ! which -s croc; then
   curl https://getcroc.schollz.com | bash
 fi
