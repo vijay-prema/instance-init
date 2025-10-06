@@ -2,7 +2,7 @@
 
 # Usual steps:
 # 1. Create runpod with default options and image: runpod/pytorch:1.0.1-cu1281-torch280-ubuntu2404
-# 2. Open VS Code remote window, ssh using the runpd IP address/port option
+# 2. Open VS Code remote window, ssh using the runpd IP address/port option, just enter `user@ip:port` e.g. `root@231.123.100.199:10477`
 # 3. Create or clone the code repo you want into /workspaces/
 # 4. Download and run this init script, in the cloned directory which should be already opened in vscode:
 #    `curl -sSL https://raw.githubusercontent.com/vijay-prema/instance-init/refs/heads/main/setup_runpod.sh | bash`
